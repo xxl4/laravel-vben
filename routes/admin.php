@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\GoogleAdsenseReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AdminController::class, 'login']);
@@ -44,5 +45,27 @@ Route::group(['middleware' => [
     Route::post('/system/admin/create', [AdminController::class, 'create']);
     Route::delete('/system/admin/delete', [AdminController::class, 'delete']);
 
+
+    // Google Adsense
+    Route::get('/google/adsense/report/accounts', [GoogleAdsenseReportController::class, 'accounts']);
+    Route::get('/google/adsense/report/custom-channels', [GoogleAdsenseReportController::class, 'customChannels']);
+    Route::get('/google/adsense/report/list-accounts-ad-clients', [GoogleAdsenseReportController::class, 'listAccountsAdclients']);
+    Route::get('/google/adsense/report/generate', [GoogleAdsenseReportController::class, 'generate']);
+    Route::get('/google/adsense/report/ads', [GoogleAdsenseReportController::class, 'ads']);
+    Route::get('/google/adsense/report/ads-performance', [GoogleAdsenseReportController::class, 'adsPerformance']);
+    Route::get('/google/adsense/report/ads-performance-dimensions', [GoogleAdsenseReportController::class, 'adsPerformanceDimensions']);
+    Route::get('/google/adsense/report/ads-performance-metrics', [GoogleAdsenseReportController::class, 'adsPerformanceMetrics']);
+    Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseReportController::class, 'adsPerformanceDimensionsMetrics']);
+
+
+
+
+
 });
+
+
+    
+
+
+
 
