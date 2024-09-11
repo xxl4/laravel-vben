@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\GoogleAdsenseReportController;
+use App\Http\Controllers\GoogleAdsenseController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AdminController::class, 'login']);
@@ -47,15 +47,17 @@ Route::group(['middleware' => [
 
 
     // Google Adsense
-    Route::get('/google/adsense/report/accounts', [GoogleAdsenseReportController::class, 'accounts']);
-    Route::get('/google/adsense/report/custom-channels', [GoogleAdsenseReportController::class, 'customChannels']);
-    Route::get('/google/adsense/report/list-accounts-ad-clients', [GoogleAdsenseReportController::class, 'listAccountsAdclients']);
-    Route::get('/google/adsense/report/generate', [GoogleAdsenseReportController::class, 'generate']);
-    Route::get('/google/adsense/report/ads', [GoogleAdsenseReportController::class, 'ads']);
-    Route::get('/google/adsense/report/ads-performance', [GoogleAdsenseReportController::class, 'adsPerformance']);
-    Route::get('/google/adsense/report/ads-performance-dimensions', [GoogleAdsenseReportController::class, 'adsPerformanceDimensions']);
-    Route::get('/google/adsense/report/ads-performance-metrics', [GoogleAdsenseReportController::class, 'adsPerformanceMetrics']);
-    Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseReportController::class, 'adsPerformanceDimensionsMetrics']);
+    Route::get('/google/adsense/accounts/list', [GoogleAdsenseController::class, 'AccountsList']);
+    Route::get('/google/adsense/accounts/get', [GoogleAdsenseController::class, 'AccountsGet']);
+
+    Route::get('/google/adsense/report/custom-channels', [GoogleAdsenseController::class, 'customChannels']);
+    Route::get('/google/adsense/report/list-accounts-ad-clients', [GoogleAdsenseController::class, 'listAccountsAdclients']);
+    Route::get('/google/adsense/report/generate', [GoogleAdsenseController::class, 'generate']);
+    Route::get('/google/adsense/report/ads', [GoogleAdsenseController::class, 'ads']);
+    Route::get('/google/adsense/report/ads-performance', [GoogleAdsenseController::class, 'adsPerformance']);
+    Route::get('/google/adsense/report/ads-performance-dimensions', [GoogleAdsenseController::class, 'adsPerformanceDimensions']);
+    Route::get('/google/adsense/report/ads-performance-metrics', [GoogleAdsenseController::class, 'adsPerformanceMetrics']);
+    Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseController::class, 'adsPerformanceDimensionsMetrics']);
 
 
 

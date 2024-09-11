@@ -7,7 +7,13 @@ use Google_Client;
 use Google_Service_Adsense;
 use stdClass;
 
-class GoogleAdsenseReportController extends Controller {
+
+/**
+ * @group Google Adsense
+ *
+ * APIs for Google Adsense
+ */
+class GoogleAdsenseController extends Controller {
 
     private $client;
     private $service;
