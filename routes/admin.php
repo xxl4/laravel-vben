@@ -50,6 +50,21 @@ Route::group(['middleware' => [
     Route::get('/google/adsense/accounts/list', [GoogleAdsenseController::class, 'AccountsList']);
     Route::get('/google/adsense/accounts/get', [GoogleAdsenseController::class, 'AccountsGet']);
 
+    Route::get('/google/adsense/accounts/adclients/list', [GoogleAdsenseController::class, 'AccountsAdclientsList']);
+    Route::get('/google/adsense/accounts/adclients/get', [GoogleAdsenseController::class, 'AccountsAdclientsGet']);
+
+    Route::get('/google/adsense/accounts/adclients/adunits/list', [GoogleAdsenseController::class, 'AccountsAdclientsAdunitsList']);
+    Route::get('/google/adsense/accounts/adclients/adunits/get', [GoogleAdsenseController::class, 'AccountsAdclientsAdunitsGet']);
+    Route::get('/google/adsense/accounts/adclients/adunits/get-ad-code', [GoogleAdsenseController::class, 'AccountsAdclientsAdunitsGetAdCode']);
+    
+    Route::get('/google/adsense/accounts/adclients/adunits/custom-channels/list', [GoogleAdsenseController::class, 'AccountsAdclientsAdunitsCustomChannelsList']);
+
+    // Account Reports Generate
+    Route::get('/google/adsense/accounts/reports/generate', [GoogleAdsenseController::class, 'AccountsReportsGenerate']);
+
+    // Account Sites
+    Route::get('/google/adsense/accounts/sites/list', [GoogleAdsenseController::class, 'AccountsSitesList']);
+
     Route::get('/google/adsense/report/custom-channels', [GoogleAdsenseController::class, 'customChannels']);
     Route::get('/google/adsense/report/list-accounts-ad-clients', [GoogleAdsenseController::class, 'listAccountsAdclients']);
     Route::get('/google/adsense/report/generate', [GoogleAdsenseController::class, 'generate']);
