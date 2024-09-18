@@ -314,7 +314,7 @@ class GoogleAdsenseController extends Controller {
             'metrics' => $metrics,
             'dimensions' => $dimensions,
             'orderBy' => $orderBy,
-            'limit' => $limit,
+           // 'limit' => $limit,
             'filters' => $filters,
             'currencyCode' => $currencyCode,
             'languageCode' => $languageCode,
