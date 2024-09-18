@@ -210,7 +210,7 @@ class GoogleAdsenseController extends Controller {
         $optParams['currencyCode'] = $currencyCode;
         $optParams['languageCode'] = $languageCode;
         $optParams['reportingTimeZone'] = $reportingTimeZone;
-        $optParams['limit'] = $limit;
+        //$optParams['limit'] = $limit;
 
         //var_dump($request->all());exit;
 
