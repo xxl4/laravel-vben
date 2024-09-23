@@ -385,34 +385,199 @@ class GoogleAdsenseController extends Controller {
                 $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '6': // Top pages
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '7': // Countries
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '8': // Products
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
                 break;
             case '9': // Platforms
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '10': // Entire account by week
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
                 break;
             case '11': // Entire account by month
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
                 break;
             case '12': // Custom Channels
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '13': // URL Channels
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '14': // Verified sites
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '15': // Served creatives
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '16': // Ad formats
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '17': // Creative sizes
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '18': // Targeting types
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '19': // Bid types
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '20': // Buyer networks
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
 
             
