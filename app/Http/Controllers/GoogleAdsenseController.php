@@ -325,11 +325,11 @@ class GoogleAdsenseController extends Controller {
                 $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
-                $advencedSelected = [];
+                $advencedSelected = ['CLICKS'];
                 $advencedDisabled = [];
 
                 $sessionMetrics = $this->sessionMetrics;
-                $sessionSelected = ['CLICKS'];
+                $sessionSelected = [];
                 $sessionDisabled = [];
                 break;
             case '2':
