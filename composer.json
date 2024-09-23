@@ -7,14 +7,15 @@
     "require": {
         "php": "^8.1",
         "casbin/laravel-authz": "^3.1",
+        "darkaonline/l5-swagger": "^8.5",
         "godruoyi/php-snowflake": "^2.1",
+        "google/apiclient": "^2.7",
         "guzzlehttp/guzzle": "^7.2",
         "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^10.0",
-        "laravel/tinker": "^2.0",
         "laravel/sanctum": "^3.2",
-        "google/apiclient": "^2.7",
-        "darkaonline/l5-swagger": "^8.5",
+        "laravel/tinker": "^2.0",
+        "nexa-merchant/apps": "^1.0",
         "tymon/jwt-auth": "^2.1.1"
     },
     "require-dev": {

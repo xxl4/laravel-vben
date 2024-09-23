@@ -18,6 +18,131 @@ class GoogleAdsenseController extends Controller {
     private $client;
     private $service;
 
+    private $metrics = [
+        'ESTIMATED_EARNINGS',
+        'COST_PER_CLICK',
+        'PAGE_VIEWS_RPM',
+        'PAGE_VIEWS',
+        'IMPRESSIONS',
+        'IMPRESSIONS_RPM',
+        'ACTIVE_VIEW_VIEWABILITY',
+        'CLICKS',
+        'METRIC_UNSPECIFIED',
+        'AD_REQUESTS',
+        'MATCHED_AD_REQUESTS',
+        'TOTAL_IMPRESSIONS',
+        'INDIVIDUAL_AD_IMPRESSIONS',
+        'PAGE_VIEWS_SPAM_RATIO',
+        'AD_REQUESTS_SPAM_RATIO',
+        'MATCHED_AD_REQUESTS_SPAM_RATIO',
+        'IMPRESSIONS_SPAM_RATIO',
+        'INDIVIDUAL_AD_IMPRESSIONS_SPAM_RATIO',
+        'CLICKS_SPAM_RATIO',
+        'AD_REQUESTS_COVERAGE',
+        'PAGE_VIEWS_CTR',
+        'AD_REQUESTS_CTR',
+        'MATCHED_AD_REQUESTS_CTR',
+        'IMPRESSIONS_CTR',
+        'INDIVIDUAL_AD_IMPRESSIONS_CTR',
+        'ACTIVE_VIEW_MEASURABILITY',
+        'ACTIVE_VIEW_TIME',
+        'AD_REQUESTS_RPM',
+        'MATCHED_AD_REQUESTS_RPM',
+        'INDIVIDUAL_AD_IMPRESSIONS_RPM',
+        'ADS_PER_IMPRESSION',
+        'TOTAL_EARNINGS',
+        'FUNNEL_REQUESTS',
+        'FUNNEL_IMPRESSIONS',
+        'FUNNEL_CLICKS',
+        'FUNNEL_RPM',
+    ];
+
+    private $recommendMetrics = [
+        'ESTIMATED_EARNINGS',
+        'COST_PER_CLICK',
+        'PAGE_VIEWS_RPM',
+        'PAGE_VIEWS',
+    ];
+
+    private $advencedMetrics = [
+        'TOTAL_IMPRESSIONS',
+        'PAGE_VIEWS',
+        'AD_REQUESTS',
+        'AD_REQUESTS_COVERAGE',
+        'CLICKS',
+        'AD_REQUESTS_CTR',
+        'COST_PER_CLICK',
+        'AD_REQUESTS_RPM',
+        'ESTIMATED_EARNINGS',
+        'FUNNEL_REQUESTS',
+        'FUNNEL_IMPRESSIONS',
+    ];
+
+    private $sessionMetrics = [
+        'PAGE_VIEWS',
+        'AD_REQUESTS',
+        'CLICKS',
+        'AD_REQUESTS_CTR',
+        'COST_PER_CLICK',
+        'AD_REQUESTS_RPM',
+        'ESTIMATED_EARNINGS',
+        'FUNNEL_REQUESTS',
+        'FUNNEL_IMPRESSIONS',
+    ];
+
+    private $orderBy = [
+        'ASC',
+        'DESC',
+    ];
+
+    private $dateRange = [
+        'TODAY',
+        'YESTERDAY',
+        'LAST_7_DAYS',
+        'LAST_30_DAYS',
+        'THIS_MONTH',
+        'LAST_MONTH',
+        'MONTH_TO_DATE',
+        'YEAR_TO_DATE',
+    ];
+
+    private $dimensions = [
+        'DATE',
+        'WEEK',
+        'MONTH',
+        'YEAR',
+        'AD_UNIT',
+        'AD_UNIT_SIZE_NAME',
+        'AD_UNIT_NAME',
+        'PRODUCT_NAME',
+        'PRODUCT_CODE',
+        'CUSTOM_CHANNEL_NAME',
+        'CUSTOM_CHANNEL_CODE',
+        'URL_CHANNEL_NAME',
+        'URL_CHANNEL_CODE',
+        'COUNTRY_NAME',
+        'COUNTRY_CODE',
+        'PLATFORM_TYPE_NAME',
+        'PLATFORM_TYPE_CODE',
+        'BUYER_NETWORK_NAME',
+        'BUYER_NETWORK_CODE',
+        'TARGETING_TYPE_NAME',
+        'TARGETING_TYPE_CODE',
+        'REQUESTED_AD_TYPE_NAME',
+        'REQUESTED_AD_TYPE_CODE',
+        'AD_CLIENT_NAME',
+        'AD_CLIENT_CODE',
+        'AD_UNIT_ID',
+        'CUSTOM_CHANNEL_ID',
+        'URL_CHANNEL_ID',
+        'COUNTRY_CRITERIA_ID',
+        'PLATFORM_TYPE_ID',
+        'BUYER_NETWORK_ID',
+        'TARGETING_TYPE_ID',
+        'REQUESTED_AD_TYPE_ID',
+        'AD_CLIENT_ID',
+    ];
+
     public function __construct()
     {
         //$this->middleware('auth:api');
@@ -176,6 +301,115 @@ class GoogleAdsenseController extends Controller {
         } catch (\Exception $e) {
             return $this->fails($e->getMessage());
         }
+    }
+
+    /**
+     * 
+     * 
+     * 
+     */
+    public function getFilter(Request $request) {
+        $filter = $request->input('id');
+
+        switch ($filter) {
+            case '1':
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS'];
+                $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = [];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
+                break;
+            case '2':
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = [];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = [];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
+                break;
+            
+            default:
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = [];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = [];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
+                break;
+        }
+        
+        $result = [];
+        $recommend = [];
+
+        //base use recommendMetrics generate the recommend array
+        foreach($this->recommendMetrics as $metric) {
+            if(in_array($metric,$recommendSelected)) {
+                $recommend[$metric] = "selected";
+                continue;
+            }
+            if(in_array($metric,$recommendDisabled)) {
+                $recommend[$metric] = "disabled";
+                continue;
+            }
+            $recommend[$metric] = "";
+        }
+
+        $result['recommend'] = $recommend;
+        $advenced = [];
+       // $advenced['TOTAL_IMPRESSIONS'] = "disabled";
+
+        //base use advencedMetrics generate the advenced array
+        foreach($this->advencedMetrics as $metric) {
+            if(in_array($metric,$advencedSelected)) {
+                $advenced[$metric] = "selected";
+                continue;
+            }
+            if(in_array($metric,$advencedDisabled)) {
+                $advenced[$metric] = "disabled";
+                continue;
+            }
+            $advenced[$metric] = "";
+        }
+
+
+
+        $result['advenced'] = $advenced;
+        $session = [];
+        //$session['PAGE_VIEWS'] = "disabled";
+
+        //base use sessionMetrics generate the session array
+        foreach($this->sessionMetrics as $metric) {
+            if(in_array($metric,$sessionSelected)) {
+                $session[$metric] = "selected";
+                continue;
+            }
+            if(in_array($metric,$sessionDisabled)) {
+                $session[$metric] = "disabled";
+                continue;
+            }
+            $session[$metric] = "";
+        }
+
+        $result['session'] = $session;
+        
+
+        return $this->success("success",$result);
     }
 
     /**

@@ -73,6 +73,7 @@ Route::group(['middleware' => [
     Route::get('/google/adsense/report/ads-performance-dimensions', [GoogleAdsenseController::class, 'adsPerformanceDimensions']);
     Route::get('/google/adsense/report/ads-performance-metrics', [GoogleAdsenseController::class, 'adsPerformanceMetrics']);
     Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseController::class, 'adsPerformanceDimensionsMetrics']);
+    Route::get('/google/adsense/report/get-filter', [GoogleAdsenseController::class, 'getFilter']);
 
 
 
