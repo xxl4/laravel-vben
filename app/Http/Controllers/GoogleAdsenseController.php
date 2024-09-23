@@ -321,7 +321,7 @@ class GoogleAdsenseController extends Controller {
         switch ($filter) {
             case '1':
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY','CLICKS'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -329,7 +329,7 @@ class GoogleAdsenseController extends Controller {
                 $advencedDisabled = [];
 
                 $sessionMetrics = $this->sessionMetrics;
-                $sessionSelected = [];
+                $sessionSelected = ['CLICKS'];
                 $sessionDisabled = [];
                 break;
             case '2':
