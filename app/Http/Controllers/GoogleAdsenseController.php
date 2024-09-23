@@ -319,10 +319,10 @@ class GoogleAdsenseController extends Controller {
         $filter = $request->input('id');
 
         switch ($filter) {
-            case '1':
+            case '1': // Ad sizes
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
+                $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
@@ -332,10 +332,10 @@ class GoogleAdsenseController extends Controller {
                 $sessionSelected = [];
                 $sessionDisabled = [];
                 break;
-            case '2':
+            case '2': // Entire account by day
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
+                $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
@@ -345,6 +345,66 @@ class GoogleAdsenseController extends Controller {
                 $sessionSelected = [];
                 $sessionDisabled = [];
                 break;
+            case '3': // Sites
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = [];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = [];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = [];
+                break;
+            case '4': // Ad units
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
+                break;
+            case '5': // Content Platforms
+                break;
+            case '6': // Top pages
+                break;
+            case '7': // Countries
+                break;
+            case '8': // Products
+                break;
+            case '9': // Platforms
+                break;
+            case '10': // Entire account by week
+                break;
+            case '11': // Entire account by month
+                break;
+            case '12': // Custom Channels
+                break;
+            case '13': // URL Channels
+                break;
+            case '14': // Verified sites
+                break;
+            case '15': // Served creatives
+                break;
+            case '16': // Ad formats
+                break;
+            case '17': // Creative sizes
+                break;
+            case '18': // Targeting types
+                break;
+            case '19': // Bid types
+                break;
+            case '20': // Buyer networks
+                break;
+
+            
             
             default:
                 $recommendMetrics = $this->recommendMetrics;
