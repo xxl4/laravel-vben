@@ -64,7 +64,6 @@ class GoogleAdsenseController extends Controller {
         'IMPRESSIONS',
         'IMPRESSIONS_RPM',
         'ACTIVE_VIEW_VIEWABILITY',
-        'CLICKS',
         'CTR',
         'AVERAGE_VIEWABLE_TIME',
         'ACTIVE_VIEW_MEASURABILITY',   
