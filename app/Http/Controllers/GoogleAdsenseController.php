@@ -579,8 +579,7 @@ class GoogleAdsenseController extends Controller {
                 $sessionSelected = [];
                 $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
-
-            
+  
             
             default:
                 $recommendMetrics = $this->recommendMetrics;
