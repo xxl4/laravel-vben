@@ -372,6 +372,17 @@ class GoogleAdsenseController extends Controller {
                 $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '5': // Content Platforms
+                $recommendMetrics = $this->recommendMetrics;
+                $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+
+                $advencedMetrics = $this->advencedMetrics;
+                $advencedSelected = ['CLICKS'];
+                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+
+                $sessionMetrics = $this->sessionMetrics;
+                $sessionSelected = [];
+                $sessionDisabled = ['PAGE_VIEWS_PER_AD_SESSION','IMPRESSIONS_PER_AD_SESSION','AD_SESSION_DURATION','AD_SESSIONS','AD_SESSIONS_MEASURABLE','AD_SESSION_RPM'];
                 break;
             case '6': // Top pages
                 break;
