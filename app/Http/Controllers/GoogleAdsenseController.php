@@ -59,35 +59,43 @@ class GoogleAdsenseController extends Controller {
 
     private $recommendMetrics = [
         'ESTIMATED_EARNINGS',
-        'COST_PER_CLICK',
-        'PAGE_VIEWS_RPM',
         'PAGE_VIEWS',
+        'PAGE_RPM',
+        'IMPRESSIONS',
+        'IMPRESSIONS_RPM',
+        'ACTIVE_VIEW_VIEWABILITY',
+        'CLICKS',
+        'CTR',
+        'AVERAGE_VIEWABLE_TIME',
+        'ACTIVE_VIEW_MEASURABILITY',   
     ];
 
     private $advencedMetrics = [
         'TOTAL_IMPRESSIONS',
-        'PAGE_VIEWS',
-        'AD_REQUESTS',
-        'AD_REQUESTS_COVERAGE',
         'CLICKS',
-        'AD_REQUESTS_CTR',
-        'COST_PER_CLICK',
+        'CPC',
+        'PAGE_CTR',
+        'AD_REQUESTS',
         'AD_REQUESTS_RPM',
-        'ESTIMATED_EARNINGS',
+        'COVERAGE',
+        'MATCHED_AD_REQUESTS',
+        'AD_PER_IMPRESSION',
+        'AD_CTR',
+        'AD_IMPRESSIONS',
+        'AD_RPM',
         'FUNNEL_REQUESTS',
         'FUNNEL_IMPRESSIONS',
+        'FUNNEL_CLICKS',
+        'FUNNEL_RPM',
     ];
 
     private $sessionMetrics = [
-        'PAGE_VIEWS',
-        'AD_REQUESTS',
-        'CLICKS',
-        'AD_REQUESTS_CTR',
-        'COST_PER_CLICK',
-        'AD_REQUESTS_RPM',
-        'ESTIMATED_EARNINGS',
-        'FUNNEL_REQUESTS',
-        'FUNNEL_IMPRESSIONS',
+        'PAGE_VIEWS_PER_AD_SESSION',
+        'IMPRESSIONS_PER_AD_SESSION',
+        'AD_SESSION_DURATION',
+        'AD_SESSIONS',
+        'AD_SESSIONS_MEASURABLE',
+        'AD_SESSION_RPM',
     ];
 
     private $orderBy = [
@@ -314,7 +322,7 @@ class GoogleAdsenseController extends Controller {
         switch ($filter) {
             case '1':
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY','CLICKS'];
                 $recommendDisabled = ['COST_PER_CLICK','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
