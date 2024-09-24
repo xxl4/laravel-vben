@@ -60,20 +60,20 @@ class GoogleAdsenseController extends Controller {
     private $recommendMetrics = [
         'ESTIMATED_EARNINGS',
         'PAGE_VIEWS',
-        'PAGE_RPM',
+        'PAGE_VIEWS_RPM',
         'IMPRESSIONS',
         'IMPRESSIONS_RPM',
         'ACTIVE_VIEW_VIEWABILITY',
-        'CTR',
-        'AVERAGE_VIEWABLE_TIME',
+        'PAGE_VIEWS_CTR',
+        'ACTIVE_VIEW_TIME',
         'ACTIVE_VIEW_MEASURABILITY',   
     ];
 
     private $advencedMetrics = [
         'TOTAL_IMPRESSIONS',
         'CLICKS',
-        'CPC',
-        'PAGE_CTR',
+        'COST_PER_CLICK',
+        'PAGE_VIEWS_CTR',
         'AD_REQUESTS',
         'AD_REQUESTS_RPM',
         'COVERAGE',
@@ -321,7 +321,7 @@ class GoogleAdsenseController extends Controller {
         switch ($filter) {
             case '1': // Ad sizes
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_VIEWS_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -334,7 +334,7 @@ class GoogleAdsenseController extends Controller {
                 break;
             case '2': // Entire account by day
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_VIEWS_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -347,7 +347,7 @@ class GoogleAdsenseController extends Controller {
                 break;
             case '3': // Sites
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_VIEWS_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -361,11 +361,11 @@ class GoogleAdsenseController extends Controller {
             case '4': // Ad units
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -374,11 +374,11 @@ class GoogleAdsenseController extends Controller {
             case '5': // Content Platforms
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -438,7 +438,7 @@ class GoogleAdsenseController extends Controller {
                 break;
             case '10': // Entire account by week
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_VIEWS_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -451,7 +451,7 @@ class GoogleAdsenseController extends Controller {
                 break;
             case '11': // Entire account by month
                 $recommendMetrics = $this->recommendMetrics;
-                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
+                $recommendSelected = ['ESTIMATED_EARNINGS','PAGE_VIEWS','PAGE_VIEWS_RPM','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
                 $recommendDisabled = [];
 
                 $advencedMetrics = $this->advencedMetrics;
@@ -465,11 +465,11 @@ class GoogleAdsenseController extends Controller {
             case '12': // Custom Channels
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -504,11 +504,11 @@ class GoogleAdsenseController extends Controller {
             case '15': // Served creatives
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -517,11 +517,11 @@ class GoogleAdsenseController extends Controller {
             case '16': // Ad formats
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -534,7 +534,7 @@ class GoogleAdsenseController extends Controller {
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -543,11 +543,11 @@ class GoogleAdsenseController extends Controller {
             case '18': // Targeting types
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -556,11 +556,11 @@ class GoogleAdsenseController extends Controller {
             case '19': // Bid types
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
@@ -569,11 +569,11 @@ class GoogleAdsenseController extends Controller {
             case '20': // Buyer networks
                 $recommendMetrics = $this->recommendMetrics;
                 $recommendSelected = ['ESTIMATED_EARNINGS','IMPRESSIONS','IMPRESSIONS_RPM','ACTIVE_VIEW_VIEWABILITY'];
-                $recommendDisabled = ['PAGE_VIEWS','PAGE_RPM'];
+                $recommendDisabled = ['PAGE_VIEWS','PAGE_VIEWS_RPM'];
 
                 $advencedMetrics = $this->advencedMetrics;
                 $advencedSelected = ['CLICKS'];
-                $advencedDisabled = ['PAGE_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
+                $advencedDisabled = ['PAGE_VIEWS_CTR','FUNNEL_REQUESTS','FUNNEL_IMPRESSIONS','FUNNEL_CLICKS','FUNNEL_RPM'];
 
                 $sessionMetrics = $this->sessionMetrics;
                 $sessionSelected = [];
