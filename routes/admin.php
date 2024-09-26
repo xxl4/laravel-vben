@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GoogleAdsenseController;
+use App\Http\Controllers\PlatformController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AdminController::class, 'login']);
@@ -75,8 +76,20 @@ Route::group(['middleware' => [
     Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseController::class, 'adsPerformanceDimensionsMetrics']);
     Route::get('/google/adsense/report/get-filter', [GoogleAdsenseController::class, 'getFilter']);
 
-
-
+    // platform
+    Route::get('/platform/{platform}', [PlatformController::class, 'index']);
+    Route::get('/platform/{platform}/get-token', [PlatformController::class, 'getToken']);
+    Route::get('/platform/{platform}/get-campaigns', [PlatformController::class, 'getCampaigns']);
+    Route::get('/platform/{platform}/get-campaign/{campaign_id}', [PlatformController::class, 'getCampaign']);
+    Route::get('/platform/{platform}/get-campaign-items/{campaign_id}', [PlatformController::class, 'getCampaignItems']);
+    Route::get('/platform/{platform}/get-campaign-item', [PlatformController::class, 'getCampaignItem']);
+    Route::get('/platform/{platform}/get-campaign-item-stats', [PlatformController::class, 'getCampaignItemStats']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-summary', [PlatformController::class, 'getCampaignItemStatsSummary']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-breakdown', [PlatformController::class, 'getCampaignItemStatsBreakdown']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-trend', [PlatformController::class, 'getCampaignItemStatsTrend']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary', [PlatformController::class, 'getCampaignItemStatsTrendSummary']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-trend-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendBreakdown']);
+    Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
 
 });
