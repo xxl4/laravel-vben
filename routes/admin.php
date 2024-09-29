@@ -94,6 +94,7 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
 
     Route::get('/platform/{platform}/get-geo-locations', [PlatformController::class, 'getGeoLocations']);
+    Route::get('/platform/{platform}/get-support-languages', [PlatformController::class, 'getSupportLanguages']);
 
 
 

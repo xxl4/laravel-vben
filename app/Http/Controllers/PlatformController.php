@@ -85,4 +85,17 @@ class PlatformController extends Controller
         ];
         return $this->success('success',$data);
     }
+
+    // Get Support Languages from platform
+    public function getSupportLanguages($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $supportLanguages = $platform->getSupportLanguages($request->all());
+        $data = [
+            'supportLanguages' => $supportLanguages
+        ];
+        return $this->success('success',$data);
+    }
 }

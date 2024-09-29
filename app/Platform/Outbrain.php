@@ -144,6 +144,22 @@ class Outbrain implements PlatformInterface
             return $e->getMessage();
         }
     }
+
+    // Get Supported Languages From Api
+    public function getSupportLanguages() {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/metadata/supportedLanguages', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+            ]);
+            
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            return $e->getMessage();
+        }
+    }
         
 
 
