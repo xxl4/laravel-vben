@@ -146,6 +146,7 @@ class Outbrain implements PlatformInterface
     }
 
     // Get Supported Languages From Api
+    // @link https://amplifyv01.docs.apiary.io/#reference/geo-locations/retrieve-all-supported-languages/retrieve-all-supported-language
     public function getSupportLanguages() {
         try {
 
