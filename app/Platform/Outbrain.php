@@ -13,8 +13,6 @@ class Outbrain implements PlatformInterface
 
     protected $api_prefix = '/amplify/v0.1';
 
-
-
     public function __construct($params = [])
     {
         if(empty($client)) {
@@ -143,7 +141,10 @@ class Outbrain implements PlatformInterface
     
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
-            return $e->getMessage();
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
         }
     }
 
@@ -160,7 +161,76 @@ class Outbrain implements PlatformInterface
             
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
-            return $e->getMessage();
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Create Campaign
+    // @param array $params
+    // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaigns/create-a-new-campaign
+    public function createCampaign($params) {
+        try {
+
+            $response = $this->client->post('/amplify/v0.1/campaigns', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'query' => [
+                    'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels',
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Get Marketers
+    public function getMarketers($params = []) {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/marketers', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Create Marketer Conversion
+    //@link https://amplifyv01.docs.apiary.io/#reference/multiple-conversions/conversion-event/create-a-conversion-event
+    public function createMarketerConversion($marketerId, $params = []) {
+        try {
+
+            $response = $this->client->post('/amplify/v0.1/marketers/'.$marketerId.'/conversionEvents', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
         }
     }
         

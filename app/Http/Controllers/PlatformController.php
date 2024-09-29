@@ -98,4 +98,43 @@ class PlatformController extends Controller
         ];
         return $this->success('success',$data);
     }
+
+    // Create Campaign on platform
+    public function createCampaign($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaign = $platform->createCampaign($request->all());
+        $data = [
+            'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Get Marketers from platform
+    public function getMarketers($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $marketers = $platform->getMarketers($request->all());
+        $data = [
+            'marketers' => $marketers
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Create Marketer Conversion on platform
+    public function createMarketerConversion($platform, $marketerId, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $marketerConversion = $platform->createMarketerConversion($marketerId, $request->all());
+        $data = [
+            'marketerConversion' => $marketerConversion
+        ];
+        return $this->success('success',$data);
+    }
 }

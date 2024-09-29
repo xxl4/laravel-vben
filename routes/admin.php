@@ -91,10 +91,18 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendBreakdown']);
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
+    Route::post('/platform/{platform}/create-campaign', [PlatformController::class, 'createCampaign']);
+
     Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
 
     Route::get('/platform/{platform}/get-geo-locations', [PlatformController::class, 'getGeoLocations']);
     Route::get('/platform/{platform}/get-support-languages', [PlatformController::class, 'getSupportLanguages']);
+
+    // Marketers
+    Route::get('/platform/{platform}/get-marketers', [PlatformController::class, 'getMarketers']);
+    // create a marketer conversion
+    Route::post('/platform/{platform}/create-marketer-conversion/{marketerId}', [PlatformController::class, 'createMarketerConversion']);
+
 
 
 
