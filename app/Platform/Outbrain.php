@@ -11,13 +11,15 @@ class Outbrain implements PlatformInterface
 
     protected $params = [];
 
+    protected $api_prefix = '/amplify/v0.1';
+
 
 
     public function __construct($params = [])
     {
         if(empty($client)) {
             $this->client = new Client([
-                'base_uri' => $this->getPlatformApiUrl(),
+                'base_uri' => $this->getPlatformApiUrl().$this->api_prefix,
                 'timeout'  => 60,
                 'allow_redirects' => true,
                 'http_errors' => true,
@@ -78,7 +80,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/amplify/v0.1/campaigns', [
+            $response = $this->client->get('/campaigns', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -99,7 +101,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/amplify/v0.1/reports/custom', [
+            $response = $this->client->get('/reports/custom', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -124,7 +126,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/amplify/v0.1/locations/search', [
+            $response = $this->client->get('/locations/search', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -150,7 +152,7 @@ class Outbrain implements PlatformInterface
     public function getSupportLanguages() {
         try {
 
-            $response = $this->client->get('/amplify/v0.1/metadata/supportedLanguages', [
+            $response = $this->client->get('/metadata/supportedLanguages', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
