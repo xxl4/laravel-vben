@@ -72,4 +72,17 @@ class PlatformController extends Controller
         ];
         return $this->success('success',$data);
     }
+
+    // Get Geo Locations from platform
+    public function getGeoLocations($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $geoLocations = $platform->getGeoLocations($request->all());
+        $data = [
+            'geoLocations' => $geoLocations
+        ];
+        return $this->success('success',$data);
+    }
 }
