@@ -22,7 +22,7 @@ class NewsBreak implements PlatformInterface
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ],
-                'debug' => true
+                'debug' => config('app.debug')
             ]);
         } 
     }

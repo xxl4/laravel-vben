@@ -17,7 +17,7 @@ return [
     'mediago' => [
         'name' => 'mediago',
         'url' => 'https://www.mediago.com',
-        'api_url' => 'https://api.mediago.com',
+        'api_url' => 'https://api.mediago.io',
         'token' => env('MEDIAGO_TOKEN', ''),
         'account_id' => env('MEDIAGO_ACCOUNT_ID', '')
     ],
@@ -28,6 +28,13 @@ return [
         'client_id' => env('TABOOLA_Client_ID', ''),
         'client_secret' => env('TABOOLA_Client_Secret', ''),
         'account_id' => env('TABOOLA_Account_ID', ''),
+    ],
+    'outbrain' => [
+        'name' => 'outbrain',
+        'url' => 'https://my.outbrain.com',
+        'api_url' => 'https://api.outbrain.com',
+        'token' => env('OUTBRAIN_TOKEN', ''),
+        'account_id' => env('OUTBRAIN_ACCOUNT_ID', ''),
     ],
 
 ];

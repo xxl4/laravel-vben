@@ -91,6 +91,9 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendBreakdown']);
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
+    Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
+
+
 
 });
 

@@ -22,7 +22,7 @@ class Taboola implements PlatformInterface
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ],
-                'debug' => $params['debug'] ?? false
+                'debug' => config('app.debug')
             ]);
         } 
     }
@@ -178,5 +178,34 @@ class Taboola implements PlatformInterface
             return $data;
 
         }
+    }
+
+    public function getReports($query = [])
+    {
+        $token = $this->getToken();
+
+        try {
+                
+                $response = $this->client->get('backstage/api/1.0/'.$this->getPlatformAccountId().'/reports/campaign-summary/dimensions/day', [
+                    'headers' => [
+                        'Authorization' => 'Bearer '.$token,
+                        'Content-Type' => 'application/json'
+                    ],
+                    'query' => $query
+                ]);
+
+                $data = json_decode($response->getBody(), true);
+
+                return $data;
+        }catch (\Exception $e) {
+
+            $data = [];
+            $data['error'] = $e->getMessage();
+            $data['code'] = $e->getCode();
+            
+            return $data;
+        }
+
+
     }
 }

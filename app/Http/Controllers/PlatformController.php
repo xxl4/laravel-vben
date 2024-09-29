@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Platform\Taboola;
+use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
@@ -54,6 +55,20 @@ class PlatformController extends Controller
         $campaignItems = $platform->getCampaignItems($campaign_id);
         $data = [
             'campaignItems' => $campaignItems
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Get Reports from platform
+
+    public function getReports($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $reports = $platform->getReports($request->all());
+        $data = [
+            'reports' => $reports
         ];
         return $this->success('success',$data);
     }
