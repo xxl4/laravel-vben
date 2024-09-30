@@ -92,6 +92,8 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
     Route::post('/platform/{platform}/create-campaign', [PlatformController::class, 'createCampaign']);
+    Route::post('/platform/{platform}/create-campaign-item', [PlatformController::class, 'createCampaignItem']);
+    Route::post('/platform/{platform}/create-campaign-item-stats', [PlatformController::class, 'createCampaignItemStats']);
 
     Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
 
@@ -104,6 +106,15 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-marketer-conversions/{marketerId}', [PlatformController::class, 'getMarketerConversions']);
     // create a marketer conversion
     Route::post('/platform/{platform}/create-marketer-conversion/{marketerId}', [PlatformController::class, 'createMarketerConversion']);
+    // Get marketer conversion stats
+    Route::get('/platform/{platform}/get-marketer-conversion-stats/{marketerId}', [PlatformController::class, 'getMarketerConversionStats']);
+    // Get marketer budgets
+    Route::get('/platform/{platform}/get-marketer-budgets/{marketerId}', [PlatformController::class, 'getMarketerBudgets']);
+    // create a marketer budget
+    Route::post('/platform/{platform}/create-marketer-budget/{marketerId}', [PlatformController::class, 'createMarketerBudget']);
+
+    // Get sections
+    Route::post('/platform/{platform}/get-sections', [PlatformController::class, 'getSections']);
 
 
 

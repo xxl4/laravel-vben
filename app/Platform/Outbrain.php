@@ -78,7 +78,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/campaigns', [
+            $response = $this->client->get('/amplify/v0.1/campaigns', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -99,7 +99,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/reports/custom', [
+            $response = $this->client->get('/amplify/v0.1/reports/custom', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -124,7 +124,7 @@ class Outbrain implements PlatformInterface
     {
         try {
 
-            $response = $this->client->get('/locations/search', [
+            $response = $this->client->get('/amplify/v0.1/locations/search', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -153,7 +153,7 @@ class Outbrain implements PlatformInterface
     public function getSupportLanguages() {
         try {
 
-            $response = $this->client->get('/metadata/supportedLanguages', [
+            $response = $this->client->get('/amplify/v0.1/metadata/supportedLanguages', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
@@ -242,6 +242,68 @@ class Outbrain implements PlatformInterface
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
                 ],
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // getMarketerBudgets
+    // @link https://amplifyv01.docs.apiary.io/#reference/budgets/budgets-collection/list-budgets-for-a-marketer
+    public function getMarketerBudgets($marketerId, $params = []) {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/marketers/'.$marketerId.'/budgets', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // createMarketerBudget
+    //@link https://amplifyv01.docs.apiary.io/#reference/budgets/budgets-collection/create-a-budget-for-a-marketer
+    public function createMarketerBudget($marketerId, $params = []) {
+        try {
+
+            $response = $this->client->post('/amplify/v0.1/marketers/'.$marketerId.'/budgets', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // getSections
+    // @link https://amplifyv01.docs.apiary.io/#reference/sections/sections-collection-response/list-all-metadata-for-section-ids
+    public function getSections($params = []) {
+        try {
+
+            $response = $this->client->post('/amplify/v0.1/sections', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'json' => $params
             ]);
     
             return json_decode($response->getBody()->getContents(), true);

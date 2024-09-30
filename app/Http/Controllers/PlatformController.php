@@ -151,5 +151,44 @@ class PlatformController extends Controller
         return $this->success('success',$data);
     }
 
+    // Get Marketer Budgets from platform
+    public function getMarketerBudgets($platform, $marketerId, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $marketerBudgets = $platform->getMarketerBudgets($marketerId, $request->all());
+        $data = [
+            'marketerBudgets' => $marketerBudgets
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Create Marketer Budget on platform
+    public function createMarketerBudget($platform, $marketerId, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $marketerBudget = $platform->createMarketerBudget($marketerId, $request->all());
+        $data = [
+            'marketerBudget' => $marketerBudget
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Get Sections from platform
+    public function getSections($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $sections = $platform->getSections($request->all());
+        $data = [
+            'sections' => $sections
+        ];
+        return $this->success('success',$data);
+    }
+
     
 }
