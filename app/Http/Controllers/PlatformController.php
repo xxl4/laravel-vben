@@ -137,4 +137,19 @@ class PlatformController extends Controller
         ];
         return $this->success('success',$data);
     }
+
+    // Get Marketer Conversions from platform
+    public function getMarketerConversions($platform, $marketerId, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $marketerConversions = $platform->getMarketerConversions($marketerId, $request->all());
+        $data = [
+            'marketerConversions' => $marketerConversions
+        ];
+        return $this->success('success',$data);
+    }
+
+    
 }

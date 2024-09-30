@@ -100,6 +100,8 @@ Route::group(['middleware' => [
 
     // Marketers
     Route::get('/platform/{platform}/get-marketers', [PlatformController::class, 'getMarketers']);
+    // Get marketer conversions from marketer
+    Route::get('/platform/{platform}/get-marketer-conversions/{marketerId}', [PlatformController::class, 'getMarketerConversions']);
     // create a marketer conversion
     Route::post('/platform/{platform}/create-marketer-conversion/{marketerId}', [PlatformController::class, 'createMarketerConversion']);
 

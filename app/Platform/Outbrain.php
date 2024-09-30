@@ -233,6 +233,25 @@ class Outbrain implements PlatformInterface
             return $error;
         }
     }
+
+    // getMarketerConversions
+    public function getMarketerConversions($marketerId, $params = []) {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/marketers/'.$marketerId.'/conversionEvents', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
         
 
 
