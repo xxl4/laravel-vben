@@ -92,6 +92,12 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
     Route::post('/platform/{platform}/create-campaign', [PlatformController::class, 'createCampaign']);
+
+    Route::put('/platform/{platform}/update-campaign/{campaign_id}', [PlatformController::class, 'updateCampaign']);
+    Route::delete('/platform/{platform}/delete-campaign/{campaign_id}', [PlatformController::class, 'deleteCampaign']);
+
+
+
     Route::post('/platform/{platform}/create-campaign-item', [PlatformController::class, 'createCampaignItem']);
     Route::post('/platform/{platform}/create-campaign-item-stats', [PlatformController::class, 'createCampaignItemStats']);
 

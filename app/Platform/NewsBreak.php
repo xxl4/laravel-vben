@@ -105,6 +105,124 @@ class NewsBreak implements PlatformInterface
         }
     }
 
+    // create campaign
+    /**
+     * 
+     * 
+     * @link https://business.newsbreak.com/business-api-doc/docs/api-reference/campaign/create-a-campaign
+     * 
+     * 
+     */
+    public function createCampaign($params = []){
+        $token = $this->getToken();
+        if(!$token) {
+            return [];
+        }
+
+        $params['adAccountId'] = $this->getPlatformAccountId();
+        
+        try {
+            $response = $this->client->post('/business-api/v1/campaign/create', [
+                'headers' => [
+                    'Access-Token' => $token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            
+
+            $data = [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
+
+            return $data;
+
+        }
+    }
+
+    // update campaign
+    /**
+     * 
+     * 
+     * @link https://business.newsbreak.com/business-api-doc/docs/api-reference/campaign/update-a-campaign
+     * 
+     * 
+     */
+    public function updateCampaign($campaign_id, $params = []){
+        $token = $this->getToken();
+        if(!$token) {
+            return [];
+        }
+
+        $params['adAccountId'] = $this->getPlatformAccountId();
+        
+        try {
+            $response = $this->client->put('/business-api/v1/campaign/update', [
+                'headers' => [
+                    'Access-Token' => $token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            
+
+            $data = [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
+
+            return $data;
+
+        }
+    }
+
+    // delete campaign
+    /**
+     * 
+     * 
+     * @link https://business.newsbreak.com/business-api-doc/docs/api-reference/campaign/delete-a-campaign
+     * 
+     * 
+     */
+
+    public function deleteCampaign($campaign_id){
+        $token = $this->getToken();
+        if(!$token) {
+            return [];
+        }
+
+        $params['adAccountId'] = $this->getPlatformAccountId();
+        
+        try {
+            $response = $this->client->delete('/business-api/v1/campaign/delete', [
+                'headers' => [
+                    'Access-Token' => $token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            
+
+            $data = [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
+
+            return $data;
+
+        }
+    }
+
     public function getAdsets($params = []){
         $token = $this->getToken();
         if(!$token) {

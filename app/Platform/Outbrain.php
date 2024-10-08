@@ -172,6 +172,72 @@ class Outbrain implements PlatformInterface
     // @param array $params
     // @return array
     // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaigns/create-a-new-campaign
+    /**
+     * 
+     * 
+     * @param array $params
+     * 
+     * {
+  "name": "new campaign 01",
+  "cpc": 0.05,
+  "enabled": true,
+  "budgetId": "0027a7068fc5da2b40c8356b5fd3352c41",
+  "targeting": {
+    "platform": [
+      "DESKTOP",
+      "MOBILE"
+    ],
+    "locations": [
+      "567c6368ea1c2697aeb72e3a6e117967"
+    ],
+    "operatingSystems": [
+      "MacOs",
+      "Windows"
+    ],
+    "browsers": [
+      "Chrome"
+    ],
+    "language": "EN"
+  },
+  "suffixTrackingCode": "utm_source=outb&utm_medium=cpc&utm_campaign=abc%20def",
+  "feeds": [
+    "http://myfeedurl.com/feed/first",
+    "http://myfeedurl.com/feed/another"
+  ],
+  "bids": {
+    "bySection": [
+      {
+        "sectionId": "000620da8a5a58f0a0a835f896392080dd",
+        "cpcAdjustment": 0.1
+      }
+    ]
+  },
+  "onAirType": "Scheduled",
+  "scheduling": {
+    "cpc": [
+      {
+        "startDay": "Sunday",
+        "endDay": "Monday",
+        "startHour": 3,
+        "endHour": 1,
+        "cpcAdjustment": 0.1
+      }
+    ],
+    "onAir": [
+      {
+        "startDay": "Sunday",
+        "endDay": "Sunday",
+        "startHour": 8,
+        "endHour": 12
+      }
+    ]
+  },
+  "objective": "Awareness",
+  "creativeFormat": "Standard"
+}
+     * 
+     * 
+     */
     public function createCampaign($params) {
         try {
 
@@ -183,6 +249,27 @@ class Outbrain implements PlatformInterface
                     'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels',
                 ],
                 'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['message'] = $e->getMessage();
+            $error['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Delete Campaign
+    // @param string $campaignId
+    // @return array
+    public function deleteCampaign($campaignId) {
+        try {
+
+            $response = $this->client->delete('/amplify/v0.1/campaigns/'.$campaignId, [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
             ]);
     
             return json_decode($response->getBody()->getContents(), true);

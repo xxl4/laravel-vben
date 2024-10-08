@@ -112,6 +112,32 @@ class PlatformController extends Controller
         return $this->success('success',$data);
     }
 
+    // Update Campaign on platform
+    public function updateCampaign($platform, $campaign_id, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaign = $platform->updateCampaign($campaign_id, $request->all());
+        $data = [
+            'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
+    // delete Campaign on platform
+    public function deleteCampaign($platform, $campaign_id) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaign = $platform->deleteCampaign($campaign_id);
+        $data = [
+            'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
     // Get Marketers from platform
     public function getMarketers($platform, Request $request) {
 

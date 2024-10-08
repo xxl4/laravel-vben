@@ -180,6 +180,143 @@ class Taboola implements PlatformInterface
         }
     }
 
+    /**
+     * createCampaign
+     * 
+     * @param $data
+     * @return array
+     * 
+     * @throws \Exception
+     * 
+     * {
+  "name": "new campaign 01",
+  "cpc": 0.01,
+  "branding_text": "Pizza",
+  "spending_limit": 100000,
+  "spending_limit_model": "MONTHLY",
+  "marketing_objective": "DRIVE_WEBSITE_TRAFFIC"
+}
+     * 
+     * Create Campaign
+     * 
+     * @link https://developers.taboola.com/backstage-api/reference/create-a-campaign
+     */
+    public function createCampaign($data) {
+        $token = $this->getToken();
+
+        try {
+            
+            $response = $this->client->post('backstage/api/1.0/'.$this->getPlatformAccountId().'/campaigns', [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $data
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            return $data;
+        } catch (\Exception $e) {
+
+            $data = [];
+            $data['error'] = $e->getMessage();
+            $data['code'] = $e->getCode();
+            
+            return $data;
+
+        }
+    }
+
+    /**
+     * updateCampaign
+     * 
+     * @param $campaign_id
+     * @param $data
+     * @return array
+     * 
+     * @throws \Exception
+     * 
+     * {
+     * "name": "new campaign 01",
+     * "cpc": 0.01,
+     * "branding_text": "Pizza",
+     * "spending_limit": 100000,
+     * "spending_limit_model": "MONTHLY",
+     * "marketing_objective": "DRIVE_WEBSITE_TRAFFIC"
+     * }
+     * 
+     * Update Campaign
+     * 
+     * @link https://developers.taboola.com/backstage-api/reference/update-a-campaign
+     */
+
+    public function updateCampaign($campaign_id, $data) {
+        $token = $this->getToken();
+
+        try {
+            
+            $response = $this->client->put('backstage/api/1.0/'.$this->getPlatformAccountId().'/campaigns/'.$campaign_id, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $data
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            return $data;
+        } catch (\Exception $e) {
+
+            $data = [];
+            $data['error'] = $e->getMessage();
+            $data['code'] = $e->getCode();
+            
+            return $data;
+
+        }
+    }
+
+    /**
+     * deleteCampaign
+     * 
+     * @param $campaign_id
+     * @return array
+     * 
+     * @throws \Exception
+     * 
+     * Delete Campaign
+     * 
+     * @link https://developers.taboola.com/backstage-api/reference/delete-a-campaign
+     */
+
+    public function deleteCampaign($campaign_id) {
+        $token = $this->getToken();
+
+        try {
+            
+            $response = $this->client->delete('backstage/api/1.0/'.$this->getPlatformAccountId().'/campaigns/'.$campaign_id, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$token,
+                    'Content-Type' => 'application/json'
+                ]
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            return $data;
+        } catch (\Exception $e) {
+
+            $data = [];
+            $data['error'] = $e->getMessage();
+            $data['code'] = $e->getCode();
+            
+            return $data;
+
+        }
+    }
+
     public function getReports($query = [])
     {
         $token = $this->getToken();
