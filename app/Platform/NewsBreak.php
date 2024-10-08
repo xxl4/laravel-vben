@@ -108,6 +108,8 @@ class NewsBreak implements PlatformInterface
     // create campaign
     /**
      * 
+     * @param array $params
+     * @return array
      * 
      * @link https://business.newsbreak.com/business-api-doc/docs/api-reference/campaign/create-a-campaign
      * 
@@ -147,6 +149,8 @@ class NewsBreak implements PlatformInterface
     // update campaign
     /**
      * 
+     * @param array $params
+     * @return array
      * 
      * @link https://business.newsbreak.com/business-api-doc/docs/api-reference/campaign/update-a-campaign
      * 

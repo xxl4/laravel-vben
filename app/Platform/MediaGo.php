@@ -20,8 +20,7 @@ class MediaGo implements PlatformInterface
                 'http_errors' => true,
                 'headers' => [
                     'Content-Type' => 'application/x-www-formurlencoded',
-                    'charset' => 'utf-8',
-                    'Authorization' => 'Bearer ' . $this->getToken(),
+                    'charset' => 'utf-8'
                 ],
                 'debug' => config('app.debug')
             ]);
@@ -95,6 +94,87 @@ class MediaGo implements PlatformInterface
     public function getCampaign($campaign_id)
     {
 
+    }
+
+    /**
+     * createCampaign
+     * 
+     * Create a campaign
+     * 
+     * @param array $params
+     * @return array
+     * 
+     * 
+     * 
+     */
+    public function createCampaign($params = [])
+    {
+        $token = $this->getToken();
+        if(!$token) {
+            return [];
+        }
+
+        $params['adAccountId'] = $this->getPlatformAccountId();
+        $params['pageNo'] = $params['page'] ?? 1;
+        $params['pageSize'] = $params['page_size'] ?? 10;
+        
+        try {
+            $response = $this->client->post('/manage/v1/campaign/create', [
+                'headers' => [
+                    'Authorization' => "Bearer ".$token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+                
+    
+                $data = [
+                    'error' => $e->getMessage(),
+                    'code' => $e->getCode()
+                ];
+    
+                return $data;
+        }
+    }
+
+    // update campaign
+    public function updateCampaign($campaign_id, $params = [])
+    {
+
+        $token = $this->getToken();
+        if(!$token) {
+            return [];
+        }
+
+        try {
+            $response = $this->client->post('/manage/v1/campaign/update', [
+                'headers' => [
+                    'Authorization' => "Bearer ".$token,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params
+            ]);
+
+            return json_decode($response->getBody()->getContents(), true);
+        }catch (\Exception $e) {
+            $data = [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ];
+
+            return $data;
+        }
+
+    }
+
+    // delete campaign
+    public function deleteCampaign($campaign_id)
+    {
+        // don't support delete campaign
+        return [];
     }
 
     public function getCampaignItems($campaign_id)
