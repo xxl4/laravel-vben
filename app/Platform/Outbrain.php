@@ -142,8 +142,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -162,8 +162,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -254,8 +254,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -263,6 +263,7 @@ class Outbrain implements PlatformInterface
     // Delete Campaign
     // @param string $campaignId
     // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaigns/delete-a-campaign
     public function deleteCampaign($campaignId) {
         try {
 
@@ -275,8 +276,104 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign pause
+    // @param string $campaignId
+    // @return array
+    public function pauseCampaign($campaignId) {
+        try {
+
+            $response = $this->client->post('/amplify/v0.1/campaigns/'.$campaignId.'/pause', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign Collect
+    // @param string $campaignId
+    // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaigns-collection/retrieve-multiple-campaigns
+    public function collectCampaign($campaignIds) {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/campaigns/'.$campaignIds.'/multiple', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'query' => [
+                    'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels'
+                ]
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign getCampaignCollections
+    // @param array $params
+    // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaigns-collection/retrieve-multiple-campaigns
+    public function getCampaignCollections($params = []) {
+        try {
+
+            $campaignIds = isset($params['campaignIds']) ? $params['campaignIds'] : '';
+
+            $response = $this->client->get('/amplify/v0.1/campaigns/'.$campaignIds.'/multiple', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'query' => [
+                    'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels'
+                ]
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign getCampaignCollectionsByBudget
+    // @param array $params
+    // @return array
+    public function getCampaignCollectionsByBudget($params = []) {
+        try {
+
+            $budgetId = isset($params['budgetId']) ? $params['budgetId'] : '';
+
+            $response = $this->client->get('/amplify/v0.1/budgets/'.$budgetId.'/campaigns', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ]
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -294,8 +391,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -315,8 +412,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -334,8 +431,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -354,8 +451,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -375,8 +472,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }
@@ -396,8 +493,8 @@ class Outbrain implements PlatformInterface
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
             $error = [];
-            $error['message'] = $e->getMessage();
-            $error['code'] = $e->getCode();
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
             return $error;
         }
     }

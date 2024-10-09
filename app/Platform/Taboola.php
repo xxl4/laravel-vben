@@ -110,11 +110,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -141,11 +140,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -171,11 +169,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -219,11 +216,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -269,11 +265,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -308,11 +303,10 @@ class Taboola implements PlatformInterface
             return $data;
         } catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -336,11 +330,10 @@ class Taboola implements PlatformInterface
                 return $data;
         }catch (\Exception $e) {
 
-            $data = [];
-            $data['error'] = $e->getMessage();
-            $data['code'] = $e->getCode();
-            
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
         }
 
 

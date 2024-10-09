@@ -1,16 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Platform\Taboola;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller
 {
-    public function index()
-    {
-        
-    }
-
+    
     public function getToken($platform) {
 
         $platform = 'App\Platform\\'.$platform;
@@ -29,6 +24,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaigns = $platform->getCampaigns();
+
+        if(isset($campaigns['error'])) {
+            return $this->fails($campaigns['error']['message'], $campaigns['error']['code']);
+        }
+
         $data = [
             'campaigns' => $campaigns
         ];
@@ -41,6 +41,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaign = $platform->getCampaign($campaign_id);
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
         $data = [
             'campaign' => $campaign
         ];
@@ -53,6 +58,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaignItems = $platform->getCampaignItems($campaign_id);
+
+        if(isset($campaignItems['error'])) {
+            return $this->fails($campaignItems['error']['message'], $campaignItems['error']['code']);
+        }
+
         $data = [
             'campaignItems' => $campaignItems
         ];
@@ -67,6 +77,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $reports = $platform->getReports($request->all());
+
+        if(isset($reports['error'])) {
+            return $this->fails($reports['error']['message'], $reports['error']['code']);
+        }
+
         $data = [
             'reports' => $reports
         ];
@@ -80,6 +95,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $geoLocations = $platform->getGeoLocations($request->all());
+
+        if(isset($geoLocations['error'])) {
+            return $this->fails($geoLocations['error']['message'], $geoLocations['error']['code']);
+        }
+
         $data = [
             'geoLocations' => $geoLocations
         ];
@@ -93,6 +113,12 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $supportLanguages = $platform->getSupportLanguages($request->all());
+
+        if(isset($supportLanguages['error'])) {
+            return $this->fails($supportLanguages['error']['message'], $supportLanguages['error']['code']);
+        }
+
+
         $data = [
             'supportLanguages' => $supportLanguages
         ];
@@ -106,6 +132,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaign = $platform->createCampaign($request->all());
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
         $data = [
             'campaign' => $campaign
         ];
@@ -119,6 +150,11 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaign = $platform->updateCampaign($campaign_id, $request->all());
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
         $data = [
             'campaign' => $campaign
         ];
@@ -132,8 +168,85 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $campaign = $platform->deleteCampaign($campaign_id);
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
         $data = [
             'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Campaign Pause On platform
+    public function pauseCampaign($platform, $campaign_id) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaign = $platform->pauseCampaign($campaign_id);
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
+        $data = [
+            'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Campaign Collect On platform
+    public function collectCampaign($platform, $campaign_id) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaign = $platform->collectCampaign($campaign_id);
+
+        if(isset($campaign['error'])) {
+            return $this->fails($campaign['error']['message'], $campaign['error']['code']);
+        }
+
+        $data = [
+            'campaign' => $campaign
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Campaign Collection On platform
+    public function getCampaignCollections($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignCollections = $platform->getCampaignCollections($request->all());
+
+        if(isset($campaignCollections['error'])) {
+            return $this->fails($campaignCollections['error']['message'], $campaignCollections['error']['code']);
+        }
+
+        $data = [
+            'campaignCollections' => $campaignCollections
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Campain Collection By Budget On platform
+    public function getCampaignCollectionsByBudget($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignCollections = $platform->getCampaignCollectionsByBudget($request->all());
+
+        if(isset($campaignCollections['error'])) {
+            return $this->fails($campaignCollections['error']['message'], $campaignCollections['error']['code']);
+        }
+
+        $data = [
+            'campaignCollections' => $campaignCollections
         ];
         return $this->success('success',$data);
     }

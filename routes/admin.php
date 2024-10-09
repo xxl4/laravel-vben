@@ -97,6 +97,12 @@ Route::group(['middleware' => [
     Route::delete('/platform/{platform}/delete-campaign/{campaign_id}', [PlatformController::class, 'deleteCampaign']);
 
 
+    // Campaign Collection
+    Route::get('/platform/{platform}/get-campaign-collections', [PlatformController::class, 'getCampaignCollections']);
+    //Campain Collection By Budget
+    Route::get('/platform/{platform}/get-campaign-collections-by-budget', [PlatformController::class, 'getCampaignCollectionsByBudget']);
+
+
 
     Route::post('/platform/{platform}/create-campaign-item', [PlatformController::class, 'createCampaignItem']);
     Route::post('/platform/{platform}/create-campaign-item-stats', [PlatformController::class, 'createCampaignItemStats']);

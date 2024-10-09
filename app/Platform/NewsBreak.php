@@ -95,12 +95,10 @@ class NewsBreak implements PlatformInterface
         } catch (\Exception $e) {
             
 
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -136,12 +134,10 @@ class NewsBreak implements PlatformInterface
         } catch (\Exception $e) {
             
 
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -177,12 +173,10 @@ class NewsBreak implements PlatformInterface
         } catch (\Exception $e) {
             
 
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -217,12 +211,10 @@ class NewsBreak implements PlatformInterface
         } catch (\Exception $e) {
             
 
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }
@@ -250,12 +242,10 @@ class NewsBreak implements PlatformInterface
         } catch (\Exception $e) {
             
 
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
 
         }
     }

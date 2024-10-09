@@ -160,12 +160,10 @@ class MediaGo implements PlatformInterface
 
             return json_decode($response->getBody()->getContents(), true);
         }catch (\Exception $e) {
-            $data = [
-                'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ];
-
-            return $data;
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
         }
 
     }
