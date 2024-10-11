@@ -35,6 +35,14 @@ class PlatformController extends Controller
         return $this->success('success',$data);
     }
 
+    /**
+     * 
+     * Get Campaign from platform
+     * @param string $platform
+     * @param string $campaign_id
+     * @return array
+     * 
+     */
     public function getCampaign($platform, $campaign_id) {
 
         $platform = 'App\Platform\\'.$platform;
@@ -52,6 +60,16 @@ class PlatformController extends Controller
         return $this->success('success',$data);
     }
 
+    /**
+     * 
+     * Get Campaign Items from platform
+     * @param string $platform
+     * @param string $campaign_id
+     * @return array
+     * @throws Exception
+     * @author Steve
+     * 
+     */
     public function getCampaignItems($platform, $campaign_id) {
 
         $platform = 'App\Platform\\'.$platform;
@@ -77,6 +95,51 @@ class PlatformController extends Controller
 
         $platform = new $platform;
         $reports = $platform->getReports($request->all());
+
+        if(isset($reports['error'])) {
+            return $this->fails($reports['error']['message'], $reports['error']['code']);
+        }
+
+        $data = [
+            'reports' => $reports
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Get Reports Full Day from platform
+    /**
+     * 
+     * Get Reports Full Day from platform
+     * 
+     */
+    public function getReportsFullDay($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $reports = $platform->getReportsFullDay($request->all());
+
+        if(isset($reports['error'])) {
+            return $this->fails($reports['error']['message'], $reports['error']['code']);
+        }
+
+        $data = [
+            'reports' => $reports
+        ];
+        return $this->success('success',$data);
+    }
+
+    /**
+     * 
+     * Retrieve campaigns with performance statistics for a Marketer Report
+     * 
+     */
+    public function getMarketerCampainsReport($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $reports = $platform->getMarketerCampainsReport($request->all());
 
         if(isset($reports['error'])) {
             return $this->fails($reports['error']['message'], $reports['error']['code']);
@@ -247,6 +310,24 @@ class PlatformController extends Controller
 
         $data = [
             'campaignCollections' => $campaignCollections
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Campain Location On platform
+    public function getCampaignLocations($platform, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignLocations = $platform->getCampaignLocations($request->all());
+
+        if(isset($campaignLocations['error'])) {
+            return $this->fails($campaignLocations['error']['message'], $campaignLocations['error']['code']);
+        }
+
+        $data = [
+            'campaignLocations' => $campaignLocations
         ];
         return $this->success('success',$data);
     }

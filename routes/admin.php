@@ -101,13 +101,13 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-collections', [PlatformController::class, 'getCampaignCollections']);
     //Campain Collection By Budget
     Route::get('/platform/{platform}/get-campaign-collections-by-budget', [PlatformController::class, 'getCampaignCollectionsByBudget']);
+    //Campain Location
+    Route::get('/platform/{platform}/get-campaign-locations', [PlatformController::class, 'getCampaignLocations']);
 
 
 
     Route::post('/platform/{platform}/create-campaign-item', [PlatformController::class, 'createCampaignItem']);
     Route::post('/platform/{platform}/create-campaign-item-stats', [PlatformController::class, 'createCampaignItemStats']);
-
-    Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
 
     Route::get('/platform/{platform}/get-geo-locations', [PlatformController::class, 'getGeoLocations']);
     Route::get('/platform/{platform}/get-support-languages', [PlatformController::class, 'getSupportLanguages']);
@@ -127,6 +127,13 @@ Route::group(['middleware' => [
 
     // Get sections
     Route::post('/platform/{platform}/get-sections', [PlatformController::class, 'getSections']);
+
+    // Reports
+    Route::get('/platform/{platform}/get-reports', [PlatformController::class, 'getReports']);
+    // Reports Full day of data
+    Route::get('/platform/{platform}/get-reports-full-day', [PlatformController::class, 'getReportsFullDay']);
+    //Retrieve campaigns with performance statistics for a Marketer Report
+    Route::get('/platform/{platform}/get-marketer-campaigns-report', [PlatformController::class, 'getMarketerCampainsReport']);
 
 
 

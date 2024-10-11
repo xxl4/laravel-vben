@@ -91,10 +91,23 @@ class Outbrain implements PlatformInterface
 
 
         }catch(\Exception $e) {
-            return $e->getMessage();
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
         }
     }
 
+    /**
+     * 
+     * Get Reports
+     * 
+     * @param array $params
+     * @return array
+     * 
+     * @link https://amplifyv01.docs.apiary.io/#reference/performance-reporting/retrieve-campaigns-with-performance-statistics-for-a-marketer
+     * 
+     */
     public function getReports($params = [])
     {
         try {
@@ -116,7 +129,40 @@ class Outbrain implements PlatformInterface
     
             return json_decode($response->getBody()->getContents(), true);
         }catch(\Exception $e) {
-            return $e->getMessage();
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    /**
+     * 
+     * Get Reports Full Day
+     * 
+     * @param array $params
+     * @return array
+     * 
+     * @link https://amplifyv01.docs.apiary.io/#reference/performance-reporting/full-day-of-data/retrieve-last-day-of-full-data
+     * 
+     */
+    public function getReportsFullDay($params = [])
+    {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/reports/fullDay', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
         }
     }
 
@@ -260,6 +306,40 @@ class Outbrain implements PlatformInterface
         }
     }
 
+    /**
+     * 
+     * Update Campaign
+     * 
+     * @param string $campaignId
+     * @param array $params
+     * @return array
+     * 
+     * 
+     * 
+     */
+
+    public function updateCampaign($campaignId, $params) {
+        try {
+
+            $response = $this->client->put('/amplify/v0.1/campaigns/'.$campaignId, [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'query' => [
+                    'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels',
+                ],
+                'json' => $params
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
     // Delete Campaign
     // @param string $campaignId
     // @return array
@@ -366,6 +446,55 @@ class Outbrain implements PlatformInterface
             $response = $this->client->get('/amplify/v0.1/budgets/'.$budgetId.'/campaigns', [
                 'headers' => [
                     'OB-TOKEN-V1' => $this->getToken()
+                ]
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign getCampaignLocations
+    // @param array $params
+    // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaign-geo-location/retrieve-campaign-geolocations
+    public function getCampaignLocations($params = []) {
+        try {
+
+            $campaignId = isset($params['campaignId']) ? $params['campaignId'] : '';
+
+            $response = $this->client->get('/amplify/v0.1/campaigns/'.$campaignId.'/locations', [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ]
+            ]);
+    
+            return json_decode($response->getBody()->getContents(), true);
+        }catch(\Exception $e) {
+            $error = [];
+            $error['error']['message'] = $e->getMessage();
+            $error['error']['code'] = $e->getCode();
+            return $error;
+        }
+    }
+
+    // Campaign getItems
+    // @param array $params
+    // @return array
+    // @link https://amplifyv01.docs.apiary.io/#reference/campaigns/campaign/retrieve-a-single-campaign
+    public function getCampaignItems($campaignId, $params = []) {
+        try {
+
+            $response = $this->client->get('/amplify/v0.1/campaigns/'.$campaignId, [
+                'headers' => [
+                    'OB-TOKEN-V1' => $this->getToken()
+                ],
+                'query' => [
+                    'extraFields' => 'CustomAudience,Locations,InterestsTargeting,BidBySections,BlockedSites,PlatformTargeting,CampaignOptimization,Scheduling,IABCategories,CampaignPixels'
                 ]
             ]);
     
