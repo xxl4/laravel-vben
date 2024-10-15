@@ -58,6 +58,7 @@ class GoogleAdsenseController extends Controller {
     ];
 
     private $recommendMetrics = [
+        'TOTAL_EARNINGS',
         'ESTIMATED_EARNINGS',
         'PAGE_VIEWS',
         'PAGE_VIEWS_RPM',
@@ -159,15 +160,15 @@ class GoogleAdsenseController extends Controller {
 
         $this->client = new Google_Client();
         $this->client->addScope('https://www.googleapis.com/auth/adsense.readonly');
-        $this->client->setAccessType('offline');
+        $this->client->addScope('https://www.googleapis.com/auth/adsense');
+        $this->client->setAccessType('online');
         $this->client->setApprovalPrompt('force');
         $this->client->setAuthConfig(storage_path('app/client_secret_33839582772-7bqi2gto92jms75ujbhvfo22je2haold.apps.googleusercontent.com.json'));
-
         $this->client->setRedirectUri('https://adsapi.heomai.com/adsense-sample.php');
-
         $token = unserialize(file_get_contents(storage_path('app/tokens.dat')));
-
         $this->client->fetchAccessTokenWithRefreshToken($token['refresh_token']);
+
+        $this->client->setLogger(new \Monolog\Logger('Google_Adsense'));
 
         $this->service = new Google_Service_Adsense($this->client);
 
@@ -207,6 +208,19 @@ class GoogleAdsenseController extends Controller {
 
         
         $accounts = $this->service->accounts->listAccounts();
+        return $this->success("success",$accounts);
+    }
+
+    /**
+     * 
+     * @link https://developers.google.com/adsense/management/reference/rest/v2/accounts/listChildAccounts
+     * 
+     */
+    public function AccountChildList(Request $request)
+    {
+        $accountId = $request->input('accountId');
+
+        $accounts = $this->service->accounts->listChildAccounts($accountId);
         return $this->success("success",$accounts);
     }
 
@@ -779,47 +793,110 @@ class GoogleAdsenseController extends Controller {
         //var_dump($optParams);
 
         $optParams = [];
+        if($dateRange=='CUSTOM') {
+            $optParams = array(
+                'startDate.year' => $startDateYear,
+                'startDate.month' => $startDateMonth,
+                'startDate.day' => $startDateDay,
+                'endDate.year' => $endDateYear,
+                'endDate.month' => $endDateMonth,
+                'endDate.day' => $endDateDay,
+                'metrics' => $metrics,
+                'dimensions' => $dimensions,
+                'orderBy' => $orderBy,
+                'limit' => $limit,
+                'filters' => $filters,
+                'currencyCode' => $currencyCode,
+                'languageCode' => $languageCode,
+                'reportingTimeZone' => $reportingTimeZone,
+                'dateRange' => $dateRange,
+            );
+        }else{
+            $optParams = array(
+                // 'startDate.year' => $startDateYear,
+                // 'startDate.month' => $startDateMonth,
+                // 'startDate.day' => $startDateDay,
+                // 'endDate.year' => $endDateYear,
+                // 'endDate.month' => $endDateMonth,
+                // 'endDate.day' => $endDateDay,
+                'metrics' => $metrics,
+                'dimensions' => $dimensions,
+                'orderBy' => $orderBy,
+               // 'limit' => $limit,
+               // 'filters' => $filters,
+               // 'currencyCode' => $currencyCode,
+                //'languageCode' => $languageCode,
+                //'reportingTimeZone' => $reportingTimeZone,
+                'dateRange' => $dateRange,
+              );
+        }
+         
 
-         $optParams = array(
-            'startDate.year' => $startDateYear,
-            'startDate.month' => $startDateMonth,
-            'startDate.day' => $startDateDay,
-            'endDate.year' => $endDateYear,
-            'endDate.month' => $endDateMonth,
-            'endDate.day' => $endDateDay,
-            'metrics' => $metrics,
-            'dimensions' => $dimensions,
-            'orderBy' => $orderBy,
-           // 'limit' => $limit,
-            'filters' => $filters,
-            'currencyCode' => $currencyCode,
-            'languageCode' => $languageCode,
-            'reportingTimeZone' => $reportingTimeZone,
-            //'dateRange' => $dateRange,
-          );
 
-          //var_dump($optParams);
-
-
-
-        // $optParams = array(
-        //     'startDate.year' => 2024,
-        //     'startDate.month' => 9,
-        //     'startDate.day' => 3,
-        //     'endDate.year' => 2024,
-        //     'endDate.month' => 9,
-        //     'endDate.day' => 30,
-        //     'metrics' => array(
-        //       'TOTAL_IMPRESSIONS', 'PAGE_VIEWS', 'AD_REQUESTS', 'AD_REQUESTS_COVERAGE', 'CLICKS',
-        //       'AD_REQUESTS_CTR', 'COST_PER_CLICK', 'AD_REQUESTS_RPM',
-        //       'ESTIMATED_EARNINGS', 'FUNNEL_REQUESTS', 'FUNNEL_IMPRESSIONS'),
-        //     'dimensions' => array('CUSTOM_CHANNEL_ID', 'DATE'),
-        //     'orderBy' => array('+CUSTOM_CHANNEL_ID', '+DATE'),
-        //   );
 
         try {
             $report = $this->service->accounts_reports->generate($accountId, $optParams);
             return $this->success("success",$report);
+        } catch (\Exception $e) {
+            return $this->fails($e->getMessage());
+        }
+    }
+
+    /**
+     * 
+     * Method: accounts.reports.saved.list
+     * 
+     */
+    public function AccountsReportsSavedList(Request $request) {
+        $accountId = $request->input('account');
+        $pageSize = $request->input('pageSize',20);
+        $pageToken = $request->input('pageToken',null);
+        $optParams = [];
+        $optParams['pageSize'] = $pageSize;
+        $optParams['pageToken'] = $pageToken;
+        try {
+            $result = $this->service->accounts_reports_saved->listAccountsReportsSaved($accountId,$optParams);
+            return $this->success("success",$result);
+        } catch (\Exception $e) {
+            return $this->fails($e->getMessage());
+        }
+    }
+
+    /**
+     * 
+     * Method: accounts.reports.saved.generate
+     * 
+     */
+    public function AccountsReportsSavedGenerate(Request $request) {
+        $accountId = $request->input('account');
+        $dateRange = $request->input('dateRange','MONTH_TO_DATE');
+        $optParams = [];
+        $optParams = array(
+            'dateRange' => $dateRange
+        );
+        try {
+            $result = $this->service->accounts_reports_saved->generate($accountId,$optParams);
+            return $this->success("success",$result);
+        } catch (\Exception $e) {
+            return $this->fails($e->getMessage());
+        }
+    }
+
+    /**
+     * Method: accounts.reports.getSaved 
+     * 
+     */
+    public function AccountsReportsSavedGet(Request $request) {
+        $name = $request->input('name');
+        $accountId = $request->input('account');
+
+        $optParams = array(
+            'dateRange' => 'YESTERDAY'
+        );
+
+        try {
+            $result = $this->service->accounts_reports->getSaved($accountId,$optParams);
+            return $this->success("success",$result);
         } catch (\Exception $e) {
             return $this->fails($e->getMessage());
         }

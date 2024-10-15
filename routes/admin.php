@@ -50,6 +50,8 @@ Route::group(['middleware' => [
     // Google Adsense
     Route::get('/google/adsense/accounts/list', [GoogleAdsenseController::class, 'AccountsList']);
     Route::get('/google/adsense/accounts/get', [GoogleAdsenseController::class, 'AccountsGet']);
+    // Account Children
+    Route::get('/google/adsense/accounts/child/list', [GoogleAdsenseController::class, 'AccountChildList']);
 
     Route::get('/google/adsense/accounts/adclients/list', [GoogleAdsenseController::class, 'AccountsAdclientsList']);
     Route::get('/google/adsense/accounts/adclients/get', [GoogleAdsenseController::class, 'AccountsAdclientsGet']);
@@ -76,25 +78,33 @@ Route::group(['middleware' => [
     Route::get('/google/adsense/report/ads-performance-dimensions-metrics', [GoogleAdsenseController::class, 'adsPerformanceDimensionsMetrics']);
     Route::get('/google/adsense/report/get-filter', [GoogleAdsenseController::class, 'getFilter']);
 
+    // Method: accounts.reports.saved.list
+    Route::get('/google/adsense/report/saved/list', [GoogleAdsenseController::class, 'AccountsReportsSavedList']);
+    // Method: accounts.reports.saved.generate
+    Route::get('/google/adsense/report/saved/generate', [GoogleAdsenseController::class, 'AccountsReportsSavedGenerate']);
+    // Method: accounts.reports.getSaved 
+    Route::get('/google/adsense/report/saved/get', [GoogleAdsenseController::class, 'AccountsReportsSavedGet']);
+
     // platform
     Route::get('/platform/{platform}', [PlatformController::class, 'index']);
     Route::get('/platform/{platform}/get-token', [PlatformController::class, 'getToken']);
     Route::get('/platform/{platform}/get-campaigns', [PlatformController::class, 'getCampaigns']);
     Route::get('/platform/{platform}/get-campaign/{campaign_id}', [PlatformController::class, 'getCampaign']);
     Route::get('/platform/{platform}/get-campaign-items/{campaign_id}', [PlatformController::class, 'getCampaignItems']);
-    Route::get('/platform/{platform}/get-campaign-item', [PlatformController::class, 'getCampaignItem']);
-    Route::get('/platform/{platform}/get-campaign-item-stats', [PlatformController::class, 'getCampaignItemStats']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-summary', [PlatformController::class, 'getCampaignItemStatsSummary']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-breakdown', [PlatformController::class, 'getCampaignItemStatsBreakdown']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-trend', [PlatformController::class, 'getCampaignItemStatsTrend']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary', [PlatformController::class, 'getCampaignItemStatsTrendSummary']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-trend-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendBreakdown']);
-    Route::get('/platform/{platform}/get-campaign-item-stats-trend-summary-breakdown', [PlatformController::class, 'getCampaignItemStatsTrendSummaryBreakdown']);
 
+    // create a campaign
     Route::post('/platform/{platform}/create-campaign', [PlatformController::class, 'createCampaign']);
-
+    // update a campaign
     Route::put('/platform/{platform}/update-campaign/{campaign_id}', [PlatformController::class, 'updateCampaign']);
+    // delete a campaign
     Route::delete('/platform/{platform}/delete-campaign/{campaign_id}', [PlatformController::class, 'deleteCampaign']);
+
+    // create a campaign item
+    Route::post('/platform/{platform}/create-campaign-item/{campaign_id}', [PlatformController::class, 'createCampaignItem']);
+    // update a campaign item
+    Route::put('/platform/{platform}/update-campaign-item/{campaign_id}/{campaign_item_id}', [PlatformController::class, 'updateCampaignItem']);
+    // delete a campaign item
+    Route::delete('/platform/{platform}/delete-campaign-item/{campaign_id}/{campaign_item_id}', [PlatformController::class, 'deleteCampaignItem']);
 
 
     // Campaign Collection
@@ -103,12 +113,7 @@ Route::group(['middleware' => [
     Route::get('/platform/{platform}/get-campaign-collections-by-budget', [PlatformController::class, 'getCampaignCollectionsByBudget']);
     //Campain Location
     Route::get('/platform/{platform}/get-campaign-locations', [PlatformController::class, 'getCampaignLocations']);
-
-
-
-    Route::post('/platform/{platform}/create-campaign-item', [PlatformController::class, 'createCampaignItem']);
-    Route::post('/platform/{platform}/create-campaign-item-stats', [PlatformController::class, 'createCampaignItemStats']);
-
+    //Platform Location
     Route::get('/platform/{platform}/get-geo-locations', [PlatformController::class, 'getGeoLocations']);
     Route::get('/platform/{platform}/get-support-languages', [PlatformController::class, 'getSupportLanguages']);
 
