@@ -87,8 +87,89 @@ class PlatformController extends Controller
         return $this->success('success',$data);
     }
 
-    // Get Reports from platform
+    /**
+     * 
+     * Create Campaign Item on platform
+     * @param string $platform
+     * @param string $campaign_id
+     * @param Request $request
+     * @return array
+     * @throws Exception
+     * 
+     */
+    public function createCampaignItem($platform, $campaign_id, Request $request) {
 
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignItem = $platform->createCampaignItem($campaign_id, $request->all());
+
+        if(isset($campaignItem['error'])) {
+            return $this->fails($campaignItem['error']['message'], $campaignItem['error']['code']);
+        }
+
+        $data = [
+            'campaignItem' => $campaignItem
+        ];
+        return $this->success('success',$data);
+    }
+
+    /**
+     * 
+     * Update Campaign Item on platform
+     * @param string $platform
+     * @param string $campaign_id
+     * @param string $campaign_item_id
+     * @param Request $request
+     * @return array
+     * @throws Exception
+     * 
+     */
+    public function updateCampaignItem($platform, $campaign_id, $campaign_item_id, Request $request) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignItem = $platform->updateCampaignItem($campaign_id, $campaign_item_id, $request->all());
+
+        if(isset($campaignItem['error'])) {
+            return $this->fails($campaignItem['error']['message'], $campaignItem['error']['code']);
+        }
+
+        $data = [
+            'campaignItem' => $campaignItem
+        ];
+        return $this->success('success',$data);
+    }
+
+    /**
+     * 
+     * Delete Campaign Item on platform
+     * @param string $platform
+     * @param string $campaign_id
+     * @param string $campaign_item_id
+     * @return array
+     * @throws Exception
+     * 
+     */
+    public function deleteCampaignItem($platform, $campaign_id, $campaign_item_id) {
+
+        $platform = 'App\Platform\\'.$platform;
+
+        $platform = new $platform;
+        $campaignItem = $platform->deleteCampaignItem($campaign_id, $campaign_item_id);
+
+        if(isset($campaignItem['error'])) {
+            return $this->fails($campaignItem['error']['message'], $campaignItem['error']['code']);
+        }
+
+        $data = [
+            'campaignItem' => $campaignItem
+        ];
+        return $this->success('success',$data);
+    }
+
+    // Get Reports from platform
     public function getReports($platform, Request $request) {
 
         $platform = 'App\Platform\\'.$platform;
