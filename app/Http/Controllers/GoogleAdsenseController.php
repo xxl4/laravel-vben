@@ -675,6 +675,16 @@ class GoogleAdsenseController extends Controller {
      */
     public function AccountsReportsGenerate(Request $request)
     {
+        $user = $request->user();
+
+        if($user->id==3) {
+            return $this->fails("Permission denied");
+        }
+
+        // if(!$user->hasPermissionTo('report-google-adsense')) {
+        //     return $this->fails("Permission denied");
+        // }
+
         $accountId = $request->input('account');
 
         $optParams = [];
@@ -848,15 +858,32 @@ class GoogleAdsenseController extends Controller {
      * 
      */
     public function AccountsReportsSavedList(Request $request) {
+
+        $user = $request->user();
+
         $accountId = $request->input('account');
         $pageSize = $request->input('pageSize',20);
         $pageToken = $request->input('pageToken',null);
         $optParams = [];
         $optParams['pageSize'] = $pageSize;
         $optParams['pageToken'] = $pageToken;
+
         try {
             $result = $this->service->accounts_reports_saved->listAccountsReportsSaved($accountId,$optParams);
-            return $this->success("success",$result);
+            $items = [];
+            foreach($result['savedReports'] as $key=>$value) {
+                 if($user->id==3) {
+                    if($value->title=="Newamc") {
+                        //unset($result['savedReports'][$key]);
+                        $items['savedReports'][] = $value;
+                        //return $this->success("success",$value);
+                    }
+                 }else{
+                    $items['savedReports'][] = $value;
+                 }  
+             }
+
+            return $this->success("success",$items);
         } catch (\Exception $e) {
             return $this->fails($e->getMessage());
         }
@@ -871,9 +898,34 @@ class GoogleAdsenseController extends Controller {
         $accountId = $request->input('account');
         $dateRange = $request->input('dateRange','MONTH_TO_DATE');
         $optParams = [];
-        $optParams = array(
-            'dateRange' => $dateRange
-        );
+        if($dateRange=='CUSTOM') {
+            $startDate = $request->input('startDate');
+            $endDate = $request->input('endDate');
+
+            $startDateYear = $request->input('startDate.year',null);
+            $startDateMonth = $request->input('startDate.month',null);
+            $startDateDay = $request->input('startDate.day',null);
+            $endDateYear = $request->input('endDate.year',null);
+            $endDateMonth = $request->input('endDate.month',null);
+            $endDateDay = $request->input('endDate.day',null);
+
+            $optParams = array(
+                'startDate.year' => $startDateYear,
+                'startDate.month' => $startDateMonth,
+                'startDate.day' => $startDateDay,
+                'endDate.year' => $endDateYear,
+                'endDate.month' => $endDateMonth,
+                'endDate.day' => $endDateDay,
+                'dateRange' => $dateRange
+            );
+        }else{
+            $optParams = array(
+                'dateRange' => $dateRange
+            );
+        }
+
+        
+        
         try {
             $result = $this->service->accounts_reports_saved->generate($accountId,$optParams);
             return $this->success("success",$result);
